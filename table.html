@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+table, th, td {
+  border:1px solid black; 
+}
+</style>
+<body>
+
+<h2>Selection Table</h2>
+
+<table id="selectionTable"  style="width:100%">
+  
+ 
+</table>
+
+
+<h2>Selected Table</h2>
+
+<table id="selectedTable" style="width:100%">
+  
+
+</table>
+
+
+<script>
+
+  var arr1 = [
+      {name: 'Amit', age: '25', gender: 'Male'},
+      {name: 'Ravi', age: '26', gender: 'Male'},
+      {name: 'Jyoti', age: '27', gender: 'Female'},
+  ];
+  
+  var arr2 = [
+      {name: 'Amal', age: '26', gender: 'Male'}
+  ];
+  
+  var selectionTable;
+  var selectedTable;
+  
+  function replaceTableData(tableNumber, index) {
+  
+  
+      if(tableNumber == 1) {
+      
+           var saveRow = {...arr1[index]};
+           arr1.splice(index,1);
+          
+           arr2.push(saveRow);
+      }
+      
+      if(tableNumber == 2) {
+       
+           var saveRow = {...arr2[index]};
+           arr2.splice(index,1);
+          
+           arr1.push(saveRow);
+      }
+  
+      selectionTable = '<tr><th></th><th>Name</th><th>Age</th><th>Gender</th></tr>';
+      
+      for(let i=0; i< arr1.length; i++) {
+      
+           selectionTable = selectionTable + ' <tr><td onclick="replaceTableData(1, '+i+')">Select Button</td><td>'+arr1[i].name+'</td><td>'+arr1[i].age+'</td><td>'+arr1[i].gender+'</td></tr>'
+                 
+      }
+      
+      selectedTable = '<tr><th></th><th>Name</th><th>Age</th><th>Gender</th></tr>';
+      
+      for(let j=0; j < arr2.length; j++) {
+      
+             selectedTable = selectedTable + ' <tr><td onclick="replaceTableData(2, '+j+')">Delete Button</td><td>'+arr2[j].name+'</td><td>'+arr2[j].age+'</td><td>'+arr2[j].gender+'</td></tr>'
+
+      }
+      
+      document.getElementById("selectionTable").innerHTML = selectionTable; 
+      document.getElementById("selectedTable").innerHTML = selectedTable; 
+  }
+  
+  replaceTableData('', '');
+
+</script>
+
+</body>
+</html>
